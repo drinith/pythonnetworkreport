@@ -17,30 +17,6 @@ class PingThread (threading.Thread):
         print(self.ip+" "+self.name)
 
 
-class PingNetwork():
-    
-    def __init__(self,host):
-        self.host = host
-        
-    #def testAliveRange(self,ip,mask):list
-    
-    def pingAllNetwork(self,host):
-        # Criando as threads
-        threads = []
-        
-        for i in host.li):
-            thread = pingThread("192.168.0"+str(i), "Máquina "+str(i))
-            threads.append(thread)    
-        
-        # Comecando novas Threads
-        for ip in threads:
-            ip.start()
-
-        
-        for t in threads:
-            t.join()
-
-
 class Host():
 
     def __init__(self,ip,mask):
@@ -86,26 +62,27 @@ class Host():
        
         return listaIp
 
-
-if __name__=="__main__":
-
-    host1 = Host("192.168.0.3","255.255.0.0")
-    print(host1)
-    print(host1.listIpRange())
-
-    """
-    # Criando as threads
-    threads = []
-    for i in range (255):
-        thread = pingThread("192.168.0"+str(i), "Máquina "+str(i))
-        threads.append(thread)    
+class PingNetwork():
     
-    # Comecando novas Threads
-    for ip in threads:
-        ip.start()
+    def __init__(self,host):
+        self.host = host
+        
+    #def testAliveRange(self,ip,mask):list
+    
+    def pingAllNetwork(self,host:Host):
+        # Criando as threads
+        threads = []
+        
+        for i in host.listIpRange():
+            thread = pingThread("192.168.0"+str(i), "Máquina "+str(i))
+            threads.append(thread)    
+        
+        # Comecando novas Threads
+        for ip in threads:
+            ip.start()
 
-    
-    for t in threads:
-        t.join()
-    
-    print ("Saindo da main")"""
+        
+        for t in threads:
+            t.join()
+
+

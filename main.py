@@ -1,10 +1,10 @@
-from pythonreportnetwork import host
+from pythonnetworkreport import Host
  
 
 
 if __name__=="__main__":
 
-    host1 = host("192.168.0.3","255.255.0.0")
+    host1 = Host("192.168.0.3","255.255.0.0")
     print(host1)
     print(host1.listIpRange())
 
