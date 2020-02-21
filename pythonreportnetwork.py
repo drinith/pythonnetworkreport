@@ -1,3 +1,7 @@
+__author__ = "Felipe Mello Fonseca"
+__email__ = "prof.felipefonseca@gmail.com"
+__status__ = "Production"
+
 import threading
  
 class pingThread (threading.Thread):
@@ -27,14 +31,15 @@ class host():
 
     def __init__(self,ip,mask):
         self.id = None
-        self.ip = ip
-        self.mask= mask
+        self.ip = ip #ip formato de string
+        self.mask= mask #ip formato de string
         self.nameReal = None
-        self.ipSplit = self.splitIP(ip)
-        self.maskSplit = self.splitIP(mask)
+        self.ipSplit = self.splitIP(ip) #ip como lista
+        self.maskSplit = self.splitIP(mask) #ip como lista
         self.network =([],[],[]) #(ipNetwork,ipSalto,ipBroadcast)
         self.findNetwork()
         
+    #Encontra rede que o host está compreendido e retirna nome da rede, salto e broadcast
     def findNetwork(self):
         #calculos de rede
         ipNetWork=[]
@@ -42,13 +47,14 @@ class host():
         ipSalto = [255-self.maskSplit[0],255-self.maskSplit[1],255-self.maskSplit[2],255-self.maskSplit[3]]
         ipBroadcast = [ipSalto[0]+ipNetwork[0],ipSalto[1]+ipNetwork[1],ipSalto[2]+ipNetwork[2],ipSalto[3]+ipNetwork[3]]
         self.network=(ipNetwork,ipSalto,ipBroadcast)
+    #Transforma os ips como string em lista
     def splitIP(self,num):
         listNum=[]
         for nume in num.split('.'):
             listNum.append(int(nume))
 
         return listNum
-
+    #lista todos os ips compreendidos no range
     def listIpRange(self):
 
         listaIp=[]
