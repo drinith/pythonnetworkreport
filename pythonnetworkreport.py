@@ -1,21 +1,10 @@
 __author__ = "Felipe Mello Fonseca"
 __email__ = "prof.felipefonseca@gmail.com"
 __status__ = "Production"
-
 import threading
- 
-class PingThread (threading.Thread):
-    def __init__(self, ip, name):
-        threading.Thread.__init__(self)
-        self.ip = ip
-        self.name = name
-        
-    def run(self):        
-        self.processo(self.nome, self.ip)
- 
-    def processo(self,ip, name):
-        print(self.ip+" "+self.name)
+from os import system
 
+listaPings = []
 
 class Host():
 
@@ -61,20 +50,32 @@ class Host():
           
        
         return listaIp
+     
+class PingThread (threading.Thread):
+    def __init__(self, ip):
+        threading.Thread.__init__(self)
+        self.ip = ip
+        
+        
+    def run(self):        
+        self.processo()
+
+    def processo(self):
+        listaPings.append(system("ping -c 1 "+self.ip))
 
 class PingNetwork():
     
-    def __init__(self,host):
+    def __init__(self,host:Host):
         self.host = host
-        
-    #def testAliveRange(self,ip,mask):list
     
-    def pingAllNetwork(self,host:Host):
+#def testAliveRange(self,ip,mask):list
+
+    def pingAllNetwork(self):
         # Criando as threads
         threads = []
         
-        for i in host.listIpRange():
-            thread = pingThread("192.168.0"+str(i), "Máquina "+str(i))
+        for i in self.host.listIpRange():
+            thread = PingThread(i)
             threads.append(thread)    
         
         # Comecando novas Threads
@@ -84,5 +85,7 @@ class PingNetwork():
         
         for t in threads:
             t.join()
+        
+        print("terminou")
 
 
