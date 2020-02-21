@@ -4,7 +4,7 @@ __status__ = "Production"
 
 import threading
  
-class pingThread (threading.Thread):
+class PingThread (threading.Thread):
     def __init__(self, ip, name):
         threading.Thread.__init__(self)
         self.ip = ip
@@ -17,17 +17,31 @@ class pingThread (threading.Thread):
         print(self.ip+" "+self.name)
 
 
-class pingNetwork():
+class PingNetwork():
     
     def __init__(self,host):
         self.host = host
         
     #def testAliveRange(self,ip,mask):list
     
-    def findRangeNetwork(self,ip,mask):(int,int)
+    def pingAllNetwork(self,host):
+        # Criando as threads
+        threads = []
+        
+        for i in host.li):
+            thread = pingThread("192.168.0"+str(i), "Máquina "+str(i))
+            threads.append(thread)    
+        
+        # Comecando novas Threads
+        for ip in threads:
+            ip.start()
+
+        
+        for t in threads:
+            t.join()
 
 
-class host():
+class Host():
 
     def __init__(self,ip,mask):
         self.id = None
