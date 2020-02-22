@@ -1,13 +1,14 @@
-from pythonnetworkreport import Host,PingNetwork
+# -*- coding: UTF-8 -*-
+
+from controller.pingnetworkcontroller import PingNetworkController as PingNetwork
  
 
 
 if __name__=="__main__":
 
-    host1 = Host("192.168.10.1","255.255.255.0")
-        
-    pNet = PingNetwork(host1)
-    pNet.pingAllNetwork()
+   
+    pNet = PingNetwork("192.168.10.1","255.255.255.0")
+    pNet.pingAllNetworkThreads()
     """
     # Criando as threads
     threads = []

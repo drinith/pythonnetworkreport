@@ -1,16 +1,7 @@
-# -*- coding: UTF-8 -*-
-
-__author__ = "Felipe Mello Fonseca"
-__email__ = "prof.felipefonseca@gmail.com"
-__status__ = "Production"
-import threading
-from os import system
-
-
-listaPings = []
-
 class Host():
 
+    listHostUp=[]
+    
     def __init__(self,ip,mask):
         self.id = None
         self.ip = ip #ip formato de string
@@ -53,62 +44,3 @@ class Host():
           
        
         return listaIp
-     
-class PingThread (threading.Thread):
-    def __init__(self, ip):
-        threading.Thread.__init__(self)
-        self.ip = ip
-        
-        
-    def run(self):        
-        self.processo()
-
-    def processo(self):
-        hostname = "google.com" #example
-        response = os.system("ping -c 1 " + hostname)
-
-        #and then check the response...
-        if response == 0:
-            print (hostname, 'is up!')
-        else:
-            print (hostname, 'is down!'))
-            listaPings.append(import os
-
-
-class PingNetwork():
-    
-    def __init__(self,host):
-        self.host = host
-    
-#def testAliveRange(self,ip,mask):list
-
-    def pingAllNetworkThreads(self):
-        # Criando as threads
-        threads = []
-        
-        for i in self.host.listIpRange():
-            thread = PingThread(i)
-            threads.append(thread)    
-        
-        # Comecando novas Threads
-        for ip in threads:
-            ip.start()
-
-        
-        for t in threads:
-            t.join()
-        
-        print("terminou")
-
-    def pingAllNetworkIcmplib(self):
-
-        listIpRange = self.host.listIpRange()
-
-        hosts = multiping(listIpRange,count=2, interval=1, timeout=2, id=None, max_threads=10)
-
-        for host in hosts:
-            if (host.is_alive()):
-         # See the Host class for details
-                print("Ligado "+ host.address)
-            else:
-                print("Desligado "+ host.address)
